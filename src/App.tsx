@@ -1,23 +1,15 @@
 
 import './App.css'
 import { BrowserRouter, Link, Route, Routes  } from 'react-router-dom'
-import Car from "./tracked-products"
 import { useEffect, useState } from 'react';
+import TrackedProduct from './views/tracked-products';
+import ShopView from './views/ShopView';
 
-function Home() {
-  return <h1>Home Page</h1>;
-}
 
-function About() {
-  return <h1>About Page</h1>;
-}
-
-function Contact() {
-  return <h1>Contact Page</h1>;
-}
 
 function App() {
   const [url, setUrl] = useState<string>("");
+  const [shops, setShops] = useState<any>([]);
 
   useEffect(() => {
    chrome.storage.local.get("lastUrl", (data) => {
@@ -43,14 +35,12 @@ function App() {
     <a>{url}</a>
       <nav>
         <Link to="/">Home</Link> |{" "}
-        <Link to="/about">About</Link> |{" "}
-        <Link to="/contact">Contact</Link>
+        <Link to="/about">Śledzone produkty</Link> |{" "}
       </nav>
 
       <Routes>
-        <Route path="/" element={<Car />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<ShopView />} />
+        <Route path="/about" element={<TrackedProduct />} />
       </Routes>
     </BrowserRouter>
   );
